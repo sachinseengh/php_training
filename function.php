@@ -15,9 +15,13 @@ message( );
 message( );
 message( );
 
-for ($x=0;$x<30;$x++){
-    echo  $x.(message( ));
-};
+// for ($x=0;$x<30;$x++){
+//     echo  $x.(message( ));
+// };
+function name($name){
+    echo "$name is your name";
+}
+name("sachin")
 
 
 
