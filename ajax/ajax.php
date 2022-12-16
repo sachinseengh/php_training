@@ -14,13 +14,15 @@
             if(uname.length <6){
             $("#errorusername").text('minimum 6 character required').css({color:"red"});
             }else{
+                $("#errorusername").text(' ');
                 $.ajax({
+                    
                     url:"check_username.php",
                     data:{"username":uname},
                     method:"post",
                     dataType:"text",
-                    success:function(response){
-
+                    success:function(res){
+                                   $("#errorusername").text(res);
                     }
 
                 });
@@ -33,8 +35,8 @@
     </script>
 </head>
 <body>
-    <form action="">
-        <label for="">Username</label>
+    <form action="" >
+        <label for="">username</label>
         <input type="text" name="username" id="username">
         <small id="errorusername"></small>
     </form>
