@@ -1,53 +1,68 @@
 <?php
 
 
+//this is from last
 
-if(isset($_POST["submit"])){
-    // print_r($_POST);
-    if(isset($_POST['username'])     &&   !empty($_POST['username'])){
-        $username =$_POST['username'];
-    }else{
-        $errorusername= "Enter Username!";
-    };
-
-    if(isset($_POST['password'])     &&   !empty($_POST['password'])){
-    $username =$_POST['password'];
-   }else{
-    $errorpassword= "Enter Password";
-  };
-
-
-
-  if(isset($username)  &&  isset($password)){
-  
-    include('../Database/connection.php');
-    print_r($conn);
-
-
-
-
-
-    
-// $name = $_POST[ 'username'];
-// $sql = "SELECT * FROM `users` WHERE username = '$name' ";
-
-// $var=$conn->query($sql);
-
-// if($var->num_rows == 1){
-//     echo "username already exist";
-// };
-
-
-  }
-
+if(isset($_COOKIE['username'])){
+    header('location:dashboard.php');
 }
 
 
+if(isset($_POST["submit"])){
+    
+    if(isset($_POST['username']) &&   !empty($_POST['username'])){
+        $username=$_POST['username'];
+    }else{
+        $error='Username not entered';
+    };
+
+
+
+    if(isset($_POST['password']) &&   !empty($_POST['password'])){
+        $password=$_POST['password'];
+    }else{
+        $errorpassword='password not entered';
+    };
+
+    if(isset($username)  &&  isset($password)){
+  
+       include('../Database/connection.php');
+
+    $sql = "SELECT * FROM `users` WHERE username = '$username' and  password = '$password' ";
+    // echo $sql;
+
+
+
+    // for inserting query into data base
+//     $sql="INSERT INTO `users` (`username`,`password`) VALUES ('$username','$password')";
+    
+//     $result = mysqli_query($conn,$sql);
+//     };
+// if($result){
+//     echo "success";
+// }else{
+//     echo "failed";
+}
+
+$var=$conn->query($sql);
+      
+// print_r($var);
+
+if($var->num_rows == 1){
+    setcookie('username',$username,time( )+24*60*60);
+    header('location:dashboard.php');
+}else{
+    $notpresent="invalid creditionals"; 
+};
+
+ 
+};
+
 ?>
 
+
+
 <!DOCTYPE html>
-
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -56,30 +71,43 @@ if(isset($_POST["submit"])){
     <title>Document</title>
 </head>
 <body>
+    <form action="" method="post">
 
-<h3>Input form</h3>
+   
+    <label for username>username:</label>
+    <input type="text" name="username" id="username">
+    <small style="color:green">
 
-<form action="" method="post">
-
-<input type="text" name="username" id="username">
-<small style="color:red"><?php
-
+    <?php
 if(isset($errorusername)){
     echo $errorusername;
 }
-?></small>
-<br><br>
+    ?></small>
 
-<input type="password" name="password" id="password">
-<small style="color:red"><?php
+      <small style="color:red">
+       <?php
+if(isset($notpresent)){
+    echo $notpresent;
+}
+    ?>
+    <br>
+    <br>
+    </small>
+    <label for password>password:</label>
+    <input type="password" name="password" id="password">
+<small style="color:green">
+<?php
 
 if(isset($errorpassword)){
     echo $errorpassword;
-}
-?></small>
-<br><br>
+};
 
-<input type="submit"   value="submit"   name="submit">
+?>
+</small>
+    <br>
+    <br>
+    <input type="submit" value="submit" name="submit">
 </form>
 </body>
 </html>
+
