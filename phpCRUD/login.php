@@ -69,12 +69,13 @@ if($var->num_rows == 1){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
     <form action="" method="post">
 
    
-    <label for username>username:</label>
+    <label for username>Username:</label>
     <input type="text" name="username" id="username">
     <small style="color:green">
 
@@ -93,7 +94,7 @@ if(isset($notpresent)){
     <br>
     <br>
     </small>
-    <label for password>password:</label>
+    <label for password>Password:</label>
     <input type="password" name="password" id="password">
 <small style="color:green">
 <?php
@@ -106,7 +107,7 @@ if(isset($errorpassword)){
 </small>
     <br>
     <br>
-    <input type="submit" value="submit" name="submit">
+    <input type="submit" value="Submit" name="submit" id="submit">
 </form>
 </body>
 </html>
