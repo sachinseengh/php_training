@@ -23,6 +23,6 @@ $object = new Users('sachin',1,95884658 );
 print_r($object);
 
 
-?>
 //access modifier are of three type
 //protected,private and public
+?>
